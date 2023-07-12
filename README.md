@@ -51,18 +51,18 @@ Solusi yang diajukan untuk menyelesaikan masalah yang telah diuraikan adalah seb
 
 Dataset yang digunakan pada proyek ini diperoleh dari Kaggle. Silahkan kunjungi tautan berikut [Mobile Phones Data](https://www.kaggle.com/datasets/pratikgarai/mobile-phone-specifications-and-prices) untuk mengakses dataset yang dipakai. Adapun variabel-variabel yang terdapat pada dataset adalah sebagai berikut :
 
-1. **Name**: Nama *Smarphone*
+1. **Name**: Nama Smartphone
 2. **Brand**: Nama Brand
-3. **Model**: Model *Smarphone*
+3. **Model**: Model Smartphone
 4. **Battery Size**: Kapasitas Baterai dalam mAh
 5. **memory_size**: Kapasitas memori internal dalam GB
-6. **popularity**: Resolusi kamera belakang dalam MP (0 jika tidak ada kamera belakang)
-7. **best_price**: Resolusi kamera depan dalam MP (0 jika tidak ada kamera belakang)
-8. **lowest_price**: OS yang digunakan pada *Smarphone*
-9. **highest_price**: Ketersediaan Wi-Fi dari *Smarphone*
-10. **seller_amount**: Ketersediaan Bluetooth dari *Smarphone*
-11. **screen_size**: Ketersediaan GPS dari *Smarphone*
-12. **release_date**: Jumlah slot SIM card *Smarphone*
+6. **popularity**: Popularitas smartphone pada pasar
+7. **best_price**: Harga terbaik smartphone pada pasaran
+8. **lowest_price**: Harga terendah smartphone pada pasaran
+9. **highest_price**: Harga tertinggi smartphone pada pasaran
+10. **seller_amount**: Jumlah penjual smartphone
+11. **screen_size**: Ukuran layar smartphone
+12. **release_date**: Tanggal smartphone rilis
 
 Pada dataset, terdapat 12 fitur numerikal dan 9 fitur kategorikal. Ringkasan statistik dari data-data numerikal dapat dilihat pada Tabel 1.
 
@@ -151,64 +151,26 @@ Pada tahap ini dilakukan proses pelatihan untuk mendapatkan model dengan perform
 
    Hasil penggunakan teknik `ColumnTransformer` disimpan dalam objek feature. Selanjutnya dilakukan proses pipeline untuk menggabungkan dan meng-optimasi kolom numerikal dan kategorikan agar dapat di proses oleh algoritma machine learning. 
 
-4. Memilih 3 (tiga) algoritma dengan performa terbaik untuk di evaluasi
+4. Memilih algoritma dengan performa terbaik untuk di evaluasi
 
    Setelah dilakukan proses pelatihan oleh Lazy Predict, diperoleh 3 algoritma dengan performa terbaik yaitu :
 
-   - **GradientBoostingRegressor**
+   - **ExtraTreesRegressor**
 
-     GradientBoostingRegressor adalah algoritma pemodelan yang digunakan dalam pembelajaran mesin untuk memprediksi variabel target berkelanjutan. Ini adalah metode ensambel yang menggabungkan beberapa pohon keputusan untuk membuat model yang lebih kuat. Algoritma GradientBoostingRegressor bekerja dengan menggabungkan banyak pohon keputusan sederhana. Setiap pohon yang ditambahkan ke model berusaha untuk memperbaiki kesalahan prediksi yang dihasilkan oleh pohon sebelumnya. Algoritma ini bekerja dengan cara mengoptimalkan gradien fungsi kerugian (misalnya, *Mean Squared Error*) menggunakan proses iteratif. Ilustrasi dari cara kerja GradienBoostingRegressor ditunjukan pada Gambar 2.
-
-     ![](https://afandistudio.net/prak_ai/GradienRegression.png)
-
-     <div style="text-align:center">Gambar 2. Ilustrasi GradienBoostingRegressor [5]</div>
-
-   - **RandomForestRegressor**
-
-     RandomForestRegressor adalah algoritma pemodelan yang digunakan dalam pembelajaran mesin untuk memprediksi variabel target berkelanjutan. Ini adalah metode ensambel yang menggabungkan beberapa pohon keputusan acak (*random decision trees*) untuk membuat model yang lebih kuat. Pada dasarnya, algoritma RandomForestRegressor bekerja dengan menggabungkan hasil dari banyak pohon keputusan acak yang diberi bobot yang sama. Setiap pohon keputusan acak dibangun dengan menggunakan subset acak dari data pelatihan dan subset acak dari fitur (variabel independen). Proses ini dikenal sebagai bootstrap aggregating atau biasa disebut juga sebagai "bagging". Ilustrasi dari cara kerja RandomForestRegressor ditunjukan pada Gambar 3.
-
-     <img src="https://afandistudio.net/prak_ai/RFRegression.jpg" style="zoom: 25%;" />
-
-     <div style="text-align:center">Gambar 3. Ilustrasi RandomForestRegressor [6]</div>
-
-   - **BaggingRegressor**
-
-     BaggingRegressor adalah algoritma pemodelan yang digunakan dalam pembelajaran mesin untuk memprediksi variabel target berkelanjutan. Ini adalah metode ensambel yang menggabungkan beberapa model regresi (misalnya, Regresi Linier, DecisionTreeRegressor) untuk membuat model yang lebih kuat. Pada dasarnya, algoritma BaggingRegressor bekerja dengan membuat beberapa model regresi yang berbeda menggunakan subset acak dari data pelatihan. Setiap model regresi dibangun secara independen dan tidak saling bergantung satu sama lain. Ketika melakukan prediksi, hasil dari semua model regresi digabungkan untuk menghasilkan prediksi akhir dengan menggunakan rata-rata atau mayoritas suara (tergantung pada jenis variabel target). Ilustrasi dari cara kerja BaggingRegressor ditunjukan pada Gambar 4.
-
-     <img src="https://afandistudio.net/prak_ai/BaggingRegressor.png" style="zoom:50%;" />
-
-     <div style="text-align:center">Gambar 4. Ilustrasi BaggingRegressor [7]</div>
-
-     Namun, BaggingRegressor tidak memberikan interpretasi model yang langsung seperti Regresi Linier. Selain itu, dalam beberapa kasus, jika terdapat korelasi yang kuat antara fitur, BaggingRegressor mungkin tidak memberikan peningkatan yang signifikan dalam kinerja prediksi dibandingkan dengan model regresi tunggal.
+     ExtraTreesRegressor adalah algoritma regresi yang digunakan dalam machine learning. Ini adalah variasi dari algoritma Random Forest yang menggabungkan beberapa pohon keputusan acak untuk membuat prediksi. Pohon keputusan acak dalam ExtraTreesRegressor dibangun dengan membagi dataset menjadi subset yang acak dan menggunakan subset tersebut untuk menghitung pembagian terbaik pada setiap langkah. Dalam setiap pohon keputusan, prediksi akhir diperoleh dengan mengambil rata-rata dari prediksi semua pohon.
 
 5. Menambahkan parameter tunning untuk mengingkatkan performa model
 
    Penambahan parameter menggunakan **Teknik Grid Search**. Sehingga diperoleh hyperparameter dari masing-masing algoritma adalah sebagai berikut.
 
-   - Parameter GradienBoostingRegressor
+   - Parameter ExtraTreesRegressor
 
      - n_estimator = 90
      - max_depth = 5
      - min_samples_split = 10
      - min_samples_leaf = 4
      - max_features = 4
-
-   - Parameter RandomForestRegressor
-
-     - n_estimator = 90
-   - max_samples = 0.4
-     - max_features = 0.5
-
-   - Parameter BaggingRegressor
-
-     - n_estimators = 70
-     - max_features = 0.7
-     - max_samples = 0.6
-
-  - warm_start= False
-    - oob_score = False
-  - bootstrap = False
-
+       
 
 ## Evaluation
 
@@ -270,26 +232,21 @@ Pada tahap ini dilakukan proses pelatihan untuk mendapatkan model dengan perform
 
 ## Conclussion
 
-1. Berdasarkan hasil pengukuran, terdapat 10 kolom atau fitur yang mempengaruhi *Price* yaitu Brand, Battery, Screen_Size, Processor, RAM, Internal_Storage, Rear_Camera, Front_Camera, OS, dan PPI.
-2. Proses preprocessing yang dilakukan adalah dengan melakukan manipulasi data seperti mengabungkan Resolution X dan Resolution Y untuk menghasilkan fitur baru yaitu PPI. Menghapus data yang tidak memiliki korelasi yang signifikan dengan *Price*, dan mengubah format tipe data pada setiap kolom yang memiliki korelasi.
-3. Berdasarkan hasil pengujian model, diperoleh hasil bahwa algoritma GradienBoosting memiliki performa yang paling baik yaitu memiliki nilai RMSE paling kecil dan R2 Score paling besar.
+1. Berdasarkan hasil pengukuran, terdapat 10 kolom atau fitur yang mempengaruhi *Prices* yaitu Brand, Battery, Screen_Size, RAM, Internal_Storage, OS.
+2. Proses preprocessing yang dilakukan adalah dengan melakukan manipulasi data seperti mengabungkan lowest_price dan highest_price untuk menghasilkan fitur baru yaitu Prices. Menghapus data yang tidak memiliki korelasi yang signifikan dengan *Prices*, dan mengubah format tipe data pada setiap kolom yang memiliki korelasi.
+3. Berdasarkan hasil pengujian model, diperoleh hasil bahwa algoritma Extra memiliki performa yang paling baik yaitu memiliki nilai RMSE paling kecil dan R2 Score paling besar.
 4. Meningkatkan performa model dapat dilakukan dengan menambahkan hyperparameter.  Pemilihan hyperparameter yang menghasilkan performa terbaik dapat dilakukan menggunakan teknik Grid Search.
 5. Dataset yang digunakan memiliki rentang jangkauan yang berbeda (imbalace), oleh sebab itu agar performa model lebih baik maka perlu dilakukan teknik SMOTE untuk menangani imbalance dataset.
 
 ## Referensi
 
-[1]   APJII, “Laporan Survei Internet APJII 2021 - 2021,” 2022. [Online]. Available: [https://apjii.or.id/survei](https://apjii.or.id/survei).
+[1]   S. Subhiksha, S. Thota, and J. Sangeetha, “Prediction of Phone Prices Using machine learning,” 2020, doi: [10.1007/978-981-15-1097-7_65](https://doi.org/10.1007/978-981-15-1097-7_65).
 
-[2]   S. Subhiksha, S. Thota, and J. Sangeetha, “Prediction of Phone Prices Using machine learning,” 2020, doi: [10.1007/978-981-15-1097-7_65](https://doi.org/10.1007/978-981-15-1097-7_65).
+[2]   A. Kalmaz and O. Akin, “Estimation of Mobile Phone Prices with machine learning,” 2022, doi: [10.1109/ICEET56468.2022.10007128](https://doi.org/10.1109/ICEET56468.2022.10007128).
 
 [3]   M. Çetın and Y. Koç, “Mobile Phone Price Class Prediction Using Different Classification Algorithms with Feature Selection and Parameter Optimization,” 2021, doi: [10.1109/ISMSIT52890.2021.9604550](https://doi.org/10.1109/ISMSIT52890.2021.9604550).
 
-[4]   A. Kalmaz and O. Akin, “Estimation of Mobile Phone Prices with machine learning,” 2022, doi: [10.1109/ICEET56468.2022.10007128](https://doi.org/10.1109/ICEET56468.2022.10007128).
+[4]  M. Saulo, N. Felipe "Online Extra Trees Regressor," 2019, doi: [https://ieeexplore.ieee.org/abstract/document/9926750]
 
-[5]  V. Aliyev, “A hands-on explanation of Gradient Boosting Regression,” *medium.com*, 2020. https://vagifaliyev.medium.com/a-hands-on-explanation-of-gradient-boosting-regression-4cfe7cfdf9e (accessed Jun. 03, 2023).
-
-[6]   J. H. Graw, W. T. Wood, and B. J. Phrampus, “Predicting Global Marine Sediment Density Using the Random Forest Regressor machine learning Algorithm,” *J. Geophys. Res. Solid Earth*, vol. 126, no. 1, pp. 1–14, 2021, doi: [10.1029/2020JB020135](https://doi.org/10.1029/2020JB020135).
-
-[7]   A. Biswal, “Bagging in machine learning: Step to Perform And Its Advantages,” *simplilearn.com*, 2023. https://www.simplilearn.com/tutorials/machine-learning-tutorial/bagging-in-machine-learning (accessed Jun. 03, 2023).
 
 **---Ini adalah bagian akhir laporan---**
