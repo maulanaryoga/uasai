@@ -2,7 +2,7 @@
 
 **Anggota Kelompok :**
 
-1. JAgustinus Ricad Simbolon - NIM. 3.34.21.3.03
+1. Agustinus Ricad Simbolon - NIM. 3.34.21.3.03
 2. Maulana Arya Yoga J. - NIM. 3.34.21.3.14
 
 ## Domain Proyek
