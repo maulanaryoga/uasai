@@ -1,9 +1,9 @@
-# Laporan Akhir Kecerdasan Buatan - Kelompok 1
+# Laporan Akhir Kecerdasan Buatan - Kelompok 3
 
 **Anggota Kelompok :**
 
-1. John Wick - NIM. 33.14.123.01
-2. Dominic Toreto - NIM. 33.14.123.02
+1. JAgustinus Ricad Simbolon - NIM. 3.34.21.3.03
+2. Maulana Arya Yoga J. - NIM. 3.34.21.3.14
 
 ## Domain Proyek
 
