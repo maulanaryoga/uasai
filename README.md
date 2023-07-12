@@ -44,7 +44,7 @@ Solusi yang diajukan untuk menyelesaikan masalah yang telah diuraikan adalah seb
    - Membagi data menjadi *training* dan *test set*, dengan prosentase 85% banding 15%. Alasan menggunakan 15% karena jumlah data yang digunakan banyak, jadi hanya dengan 15% sudah didapatkan banyak data tes.
    - Melakukan *Encoding* terhadap kolom yang bertipe objek / kategorikal menggunakan fungsi `Map`.
 4. Melakukan pemilihan model terbaik menggunakan LazyPredict
-   - Memilih 4 algoritma yang menghasilkan model dengan performa terbaik
+   - Memilih algoritma yang menghasilkan model dengan performa terbaik
    - Perfoma model terbaik dilihat dari skor *Mean Square Error* (MSE), *Root Mean Square Error* (RMSE), dan *R Square* (R2).
 
 ## Data Understanding
